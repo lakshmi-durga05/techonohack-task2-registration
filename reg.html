@@ -1,0 +1,208 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Vibester</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background-color: #e6e6fa;
+            padding: 20px;
+            text-align: center;
+        }
+        footer {
+            background-color: #f5f5f5;
+            padding: 10px;
+            text-align: center;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            margin-top: auto;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 30px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        h2 {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="number"],
+        input[type="date"],
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #800080;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #6a007a;
+        }
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm_password').value;
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match.");
+                return false;
+            }
+
+            const school = document.getElementById('school').value;
+            const college = document.getElementById('college').value;
+
+            if (!isNaN(school)) {
+                alert("Please enter valid characters for the school name.");
+                return false;
+            }
+
+            if (!isNaN(college)) {
+                alert("Please enter valid characters for the college name.");
+                return false;
+            }
+
+            // Save form data to localStorage
+            const formData = {
+                username: document.getElementById('username').value,
+                email: document.getElementById('email').value,
+                dob: document.getElementById('dob').value,
+                gender: document.getElementById('gender').value,
+                school: school,
+                class10_pass_year: document.getElementById('class10_pass_year').value,
+                college: college,
+                class12_pass_year: document.getElementById('class12_pass_year').value,
+                expected_grad_year: document.getElementById('expected_grad_year').value,
+                password: password // Save the password for login
+            };
+            localStorage.setItem('profileData', JSON.stringify(formData));
+            return true;
+        }
+
+        function logout() {
+            // Clear localStorage
+            localStorage.clear();
+
+            // Redirect to logout confirmation page
+            window.location.href = "logout.html";
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1 style="color: #800080;">Vibester</h1>
+    </header>
+
+    <div class="container">
+        <h2>Register</h2>
+        <form id="register-form" action="profile.html" method="get" onsubmit="return validateForm()">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required maxlength="150">
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob" required>
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender" required>
+                    <option value="">Select</option>
+                    <option value="female">Female</option>
+                    <option value="male">Male</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="school">Class 10 School:</label>
+                <input type="text" id="school" name="school">
+            </div>
+            <div class="form-group">
+                <label for="class10_pass_year">Class 10 Passing Year:</label>
+                <input type="number" id="class10_pass_year" name="class10_pass_year">
+            </div>
+            <div class="form-group">
+                <label for="college">Class 12 College:</label>
+                <input type="text" id="college" name="college">
+            </div>
+            <div class="form-group">
+                <label for="class12_pass_year">Class 12 Passing Year:</label>
+                <input type="number" id="class12_pass_year" name="class12_pass_year">
+            </div>
+            <div class="form-group">
+                <label for="expected_grad_year">Expected Graduation Year:</label>
+                <input type="number" id="expected_grad_year" name="expected_grad_year">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" minlength="8" required>
+            </div>
+            <div class="form-group">
+                <label for="confirm_password">Confirm Password:</label>
+                <input type="password" id="confirm_password" name="confirm_password" minlength="8" required>
+            </div>
+            <input type="submit" value="Register">
+        </form>
+        <div class="login-link">
+            <span class="bold-text">Already have an account?</span> <a href="login.html">Login</a>
+        </div>
+    </div>
+
+    <footer>
+        <nav>
+            <a href="home.html">Home</a> |
+            <a href="about.html">About</a> |
+            <a href="help.html">Help</a> |
+            <a href="login.html">Login</a> |
+            <a href="javascript:void(0);" onclick="logout();">Logout</a> |
+            <a href="register.html">Register</a>
+        </nav>
+        <p>A Spoorthi Garikipati production @2024 all rights reserved</p>
+        <p>
+            <a href="mailto:spoorthigarikipati5@gmail.com">Email</a> |
+            <a href="https://www.linkedin.com/in/spoorthi-garikipati-2086a9291?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">LinkedIn</a>
+        </p>
+    </footer>
+</body>
+</html>
